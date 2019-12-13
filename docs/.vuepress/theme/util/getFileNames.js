@@ -79,4 +79,4 @@ var fileHelper = {
   }
 }
 
-module.exports = fileHelper;
+export default fileHelper;

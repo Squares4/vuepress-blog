@@ -14,6 +14,6 @@ yarn install
 yarn docs:dev
 
 # 生产
+# 默认情况下，文件将会被生成在 .vuepress/dist
 yarn docs:build
 ```
-

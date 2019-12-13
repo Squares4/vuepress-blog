@@ -13,7 +13,7 @@
         {{ data.tagline || $description || 'Welcome to your VuePress site' }}
       </p>
 
-      <p
+      <!-- <p
         class="action"
         v-if="data.actionText && data.actionLink"
       >
@@ -21,10 +21,10 @@
           class="action-button"
           :item="actionLink"
         />
-      </p>
+      </p> -->
     </header>
 
-    <div
+    <!-- <div
       class="features"
       v-if="data.features && data.features.length"
     >
@@ -35,6 +35,26 @@
       >
         <h2>{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
+      </div>
+    </div> -->
+
+    <div
+      class="features"
+      v-if="data.nav"
+    >
+      <div
+        class="feature"
+        v-for="(item, index) in config.nav"
+        :key="index"
+      >
+        <h2
+          v-if="item.text && item.link"
+        >
+          <NavLink
+            class="action-button"
+            :item='item'
+          />
+        </h2>
       </div>
     </div>
 
@@ -57,7 +77,13 @@ export default {
 
   computed: {
     data () {
+      console.log(this.$page.frontmatter)
       return this.$page.frontmatter
+    },
+
+    config () {
+      console.log(this.$themeConfig)
+      return this.$themeConfig
     },
 
     actionLink () {
@@ -123,6 +149,7 @@ export default {
       border-bottom none
       padding-bottom 0
       color lighten($textColor, 10%)
+      text-align center
     p
       color lighten($textColor, 25%)
   .footer
