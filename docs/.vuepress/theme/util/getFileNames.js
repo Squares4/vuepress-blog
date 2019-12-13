@@ -1,10 +1,15 @@
 const fs = require('fs');
-// 排除检查的文件
-var excludes = ['.DS_Store']
-// 排除检查的文件夹
-var excludeFolder = ['.vuepress']
 
-var fileHelper = {
+// 排除检查的文件
+const excludes = ['.DS_Store']
+// 排除检查的文件夹
+const excludeFolder = ['.vuepress']
+
+const fileHelper = {
+  /**
+   * 获取路径下的除开跳过检查的所有文件
+   * @param {string} rPath docs目录
+   */
   getFileName: function (rPath) {
     let filenames = [];
     fs.readdirSync(rPath).forEach(file => {
@@ -24,6 +29,10 @@ var fileHelper = {
     filenames.sort();
     return filenames;
   },
+  /**
+   * 获取路径下的除开跳过检查的所有文件夹
+   * @param {string} rPath 
+   */
   getAllFolder: function(rPath) {
     let folderNames = [];
     fs.readdirSync(rPath).forEach(folder => {
@@ -43,7 +52,11 @@ var fileHelper = {
     folderNames.sort();
     return folderNames;
   },
-  start: function(rPath) {
+  /**
+   * 递归获得docs下的markdown目录及其内部 一层 的文件，并将其转换成适合themeConfig.sidebar的形式
+   * @param {string} rPath docs目录
+   */
+  toGetSidebar: function(rPath) {
     var sidebarConfig = {}
     var folderNames = this.getAllFolder(rPath)
     var realFolderPath = folderNames.map(folder => (
@@ -52,10 +65,15 @@ var fileHelper = {
     realFolderPath.forEach((folder, index) => {
       sidebarConfig[`/${folderNames[index]}/`] = this.getFileName(folder)
     })
-    // console.log(sidebarConfig)
     return sidebarConfig
   },
-  navBarStart: function (rPath, upper = false, limit = 0) {
+  /**
+   * 递归获得docs下的markdown目录及其内部 一层 的文件，并将其转换成适合themeConfig.nav的形式
+   * @param {string} rPath docs目录
+   * @param {boolean} upper 是否将首字母大写，默认为 false
+   * @param {number} limit 是否限制获取到的目录长度，默认为 0，即不限制
+   */
+  toGetNav: function (rPath, upper = false, limit = 0) {
     var navConfig = []
     var folderNames = this.getAllFolder(rPath)
     // 限制长度
@@ -79,4 +97,4 @@ var fileHelper = {
   }
 }
 
-export default fileHelper;
+module.exports = fileHelper;

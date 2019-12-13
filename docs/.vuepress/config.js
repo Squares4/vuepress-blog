@@ -1,19 +1,19 @@
 const path = require("path")
-const rootPath = path.dirname(__dirname)
-const fileHelper = require('./theme/util/getFileNames')
+const rootPath = path.dirname(__dirname) // docs目录
+const fileHelper = require('./theme/util/getFileNames') // 获取获取文件
 
-const sidebarConfig = fileHelper.start(rootPath)
-const navBarConfig = fileHelper.navBarStart(rootPath, true)
+const markdownSidebarConfig = fileHelper.toGetSidebar(rootPath)
+const markdownNavConfig = fileHelper.toGetNav(rootPath, true)
 
 const navConfig = [
   {
     text: 'Home',
     link: '/'
   },
-  ...navBarConfig,
+  ...markdownNavConfig,
   {
     text: 'Github',
-    link: 'https://github.com/Squares4/vuepress-blog-zpc'
+    link: 'https://github.com/Squares4/vuepress-blog'
   }
 ]
 
@@ -23,7 +23,7 @@ module.exports = {
   themeConfig: {
     lastUpdated: '上次更新', // 基于git的
     nav: navConfig,
-    sidebar: sidebarConfig
+    sidebar: markdownSidebarConfig
   },
   plugins: ['@vuepress/back-to-top']
 }
