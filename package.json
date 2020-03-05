@@ -10,5 +10,8 @@
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.2.0",
     "vuepress": "^1.2.0"
+  },
+  "dependencies": {
+    "vuepress-theme-default-prefers-color-scheme": "^1.0.5"
   }
 }

@@ -17,3 +17,8 @@ yarn docs:dev
 # 默认情况下，文件将会被生成在 .vuepress/dist
 yarn docs:build
 ```
+
+## 谢明
+
+搭建这个博客来源于许多帮助
+[一步步搭建 VuePress 及优化【初始化到发布】](https://juejin.im/post/5c9efe596fb9a05e122c73f1)
