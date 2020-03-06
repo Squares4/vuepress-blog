@@ -20,6 +20,7 @@ Jenkins官网：[https://jenkins.io/](https://jenkins.io/)<br />中文：[https:
 ### 准备工作
 
 <a name="8b8a2831"></a>
+
 #### 配置JAVA8环境
 
 jenkins 是基于java8开发的，所以我们需要给原程服务器安装java8环境，检测服务器的java环境可以用
@@ -52,7 +53,7 @@ rpm -qa |grep gcj
 
 若没有出现信息则是未安装，那么使用`yum search java`或者`yum list java*`来检索jdk列表，我们直接使用`yum list java-1.8*`来检索java8的版本
 
-出现如下列表<br />![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811758887-7bef106e-d051-43b3-8b5a-78bfedbe2b5a.png#align=left&display=inline&height=1312&name=image.png&originHeight=1312&originWidth=1230&size=623302&status=done&width=1230)
+出现如下列表<br />![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf2qofwwj30u00w0gsm.jpg)
 
 那么下载需要的java包即可，这里的x86_64后缀代表着64位系统
 
@@ -100,23 +101,23 @@ yum install -y jenkins
 
 启动后，控制台会输出这样的信息
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811778210-c29ba4c0-dfe6-4258-8823-76a353d95bb1.png#align=left&display=inline&height=650&name=image.png&originHeight=650&originWidth=1470&size=65599&status=done&width=1470)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf3kchqlj314u0i2tc8.jpg)
 
 访问http://服务器名:8080/，进入jenkins首页<br />(如果是阿里云等限制了端口访问的服务器，需要到对应控制台的安全组中，打开8080端口，解除访问限制)
 
 可以看到页面如下，输入刚才的密码即可进入。忘记密码则访问图片给出的路径<br />`cat /root/.jenkins/secrets/initialAdminPassword`
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811794694-b8d1b4b0-fe18-4712-bfd8-e8c323eef258.png#align=left&display=inline&height=1826&name=image.png&originHeight=1826&originWidth=1978&size=170230&status=done&width=1978)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf474tn3j30wi0u042z.jpg)
 
 
 选择**安装推荐的插件**，耐心等待完成即可，国内网络波动容易出错，多重试几次即可
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811808166-01134d80-56d5-4183-93e1-b1ff65780b24.png#align=left&display=inline&height=1822&name=image.png&originHeight=1822&originWidth=1974&size=251944&status=done&width=1974)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf4h88g5j30wi0u0aey.jpg)
 
 
 安装完成后，注册账户
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811819526-0fbe5b18-070d-469d-bac2-a3944b80d68f.png#align=left&display=inline&height=1822&name=image.png&originHeight=1822&originWidth=2000&size=128865&status=done&width=2000)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf6pyy2tj30wy0u0q6e.jpg)
 
 然后配置实例(域名)，一般来说默认即可
 
@@ -128,65 +129,65 @@ yum install -y jenkins
 
 除了推荐安装的插件外，我们还需要安装另外一些必要的插件<br />点击 管理jenkins
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811889269-b831b85d-ff61-4960-bdfe-8fac28ffbfad.png#align=left&display=inline&height=1048&name=image.png&originHeight=1048&originWidth=692&size=100823&status=done&width=692)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf73hq5cj30j80t475y.jpg)
 
 进入管理插件
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811906158-a530956e-eca5-454c-a1df-d84cd3e7abaf.png#align=left&display=inline&height=1688&name=image.png&originHeight=1688&originWidth=1878&size=384319&status=done&width=1878)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf73hq5cj30j80t475y.jpg)
 
 
 主要安装这几项gitlab插件，安全风险请自行斟酌。
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811921220-50d00008-7b76-490f-a67e-02c64f5c3c3f.png#align=left&display=inline&height=1690&name=image.png&originHeight=1690&originWidth=2588&size=419236&status=done&width=2588)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf7ulge7j319y0u0tk0.jpg)
 
 <a name="39da6755"></a>
 #### 创建项目
 
 安装完成后，进入首页，点击创建一个新任务
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811933736-47fcfd6b-18c8-4d27-8748-45d8089ba0e1.png#align=left&display=inline&height=1236&name=image.png&originHeight=1236&originWidth=1508&size=164098&status=done&width=1508)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf88ce7sj310m0u0jue.jpg)
 
 创建一个自由风格的项目
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811944018-332f11e1-f6f9-4827-a893-fe96467e0573.png#align=left&display=inline&height=1548&name=image.png&originHeight=1548&originWidth=1936&size=314432&status=done&width=1936)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf8hkvnhj311j0u0qaz.jpg)
 
 在**General**中，根据需要添加项目描述
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811958729-f012b400-5300-4e83-b15f-404742c8808d.png#align=left&display=inline&height=940&name=image.png&originHeight=940&originWidth=1878&size=122960&status=done&width=1878)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf8wtqqtj31g60q4n0a.jpg)
 
 在**源码管理**中，填写项目仓库和用户名（在这里是gitlab账号）<br />需要注意的是，URL必须是HTTP格式而不能是SSH格式
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568811997431-ee380b23-00b3-48ba-9665-587ae68fef32.png#align=left&display=inline&height=1276&name=image.png&originHeight=1276&originWidth=1874&size=159284&status=done&width=1874)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf9aboplj31820u00wq.jpg)
 
 **构建触发器**中，选择`Build when a change is pushed to GitLab.`点击按钮“高级”
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812053513-b8f68d10-4f32-46f5-a58a-1214a8d20246.png#align=left&display=inline&height=828&name=image.png&originHeight=828&originWidth=1882&size=133178&status=done&width=1882)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf9lxufhj31ga0n0gop.jpg)
 
 
 则可以看到以下选项，点击最下方的generate生成secret token
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812065810-c08068e0-d9d8-470b-bbe7-c8a9bf2c5cc8.png#align=left&display=inline&height=1840&name=image.png&originHeight=1840&originWidth=1886&size=307475&status=done&width=1886)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf9zgaoej30ur0u0wln.jpg)
 
 回到项目的gitlab页面，进入项目的**集成**或者存在设置web钩子(webhooks)的页面，将红框内的链接和secret token复制到gitlab相应的地方。根据需要设置触发情况，最后点击增加钩子。
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812078644-b9875e42-21a8-48e7-979c-53b2fc948275.png#align=left&display=inline&height=1768&name=image.png&originHeight=1768&originWidth=2870&size=385595&status=done&width=2870)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfafne0lj31cp0u07co.jpg)
 
 
 然后可以在下方测试钩子，如果出现状态码为200时，则创建成功
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812097103-1df79959-4917-49a1-95a1-4805e088af91.png#align=left&display=inline&height=286&name=image.png&originHeight=286&originWidth=1290&size=33251&status=done&width=1290)<br />![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812118496-ffb2067c-9bb3-426e-8eec-6a69db08e3a9.png#align=left&display=inline&height=114&name=image.png&originHeight=114&originWidth=834&size=11276&status=done&width=834)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfao2vk4j30zu07y0te.jpg)<br />![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfb2t3wej30n6036glt.jpg)
 
 <a name="09f45109"></a>
 #### 构建阶段
 
 在**构建**中，点击**增加构建步骤**，选择`Execute shell`，在这里可以执行终端的命令
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812122497-25cd2906-101c-4a00-a789-decb8e3e70dc.png#align=left&display=inline&height=298&name=image.png&originHeight=596&originWidth=640&size=59182&status=done&width=320)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfbcuxm6j30hs0gkabj.jpg)
 
 
 在这里我们输入我们需要的命令，接下来解释每一步命令的具体含义
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812132976-7f0e4252-0c06-4bf9-b28b-efcde528a66f.png#align=left&display=inline&height=706&name=image.png&originHeight=706&originWidth=1872&size=83283&status=done&width=1872)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfbo68jvj31g00jm76d.jpg)
 
 第一步，执行`cnpm install`，安装所需要的依赖包；
 
@@ -201,18 +202,20 @@ yum install -y jenkins
 <a name="4bd0d8d5"></a>
 #### 自动化远程部署
 
+这里为了演示方便，虽然可以直接在构建中部署，不过我们利用远程部署插件操作一次
+
 再次进入插件管理，安装`Publish over shh`
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812167038-4c597cbe-fa0f-466d-9d6b-e5a8e5839f8b.png#align=left&display=inline&height=960&name=image.png&originHeight=960&originWidth=2630&size=257975&status=done&width=2630)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfc244kuj32120qogrc.jpg)
 
 安装完成后，进入全局设置
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812174836-a684da91-92b4-4bb4-96e8-4d81a2984c67.png#align=left&display=inline&height=1240&name=image.png&originHeight=1240&originWidth=1784&size=319740&status=done&width=1784)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfcbm3z5j31760u045f.jpg)
 
 
 找到Publish Over SSH设置，新增SSH Server，填写相应内容
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812183785-9d380c18-1bb8-4bce-a648-433c221c67b7.png#align=left&display=inline&height=1488&name=image.png&originHeight=1488&originWidth=2646&size=294495&status=done&width=2646)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfe2247sj31hc0u0jzo.jpg)
 
 Publish Over SSH的另外一个好处在于，可以一次性将文件部署在多个服务器上
 
@@ -226,9 +229,9 @@ Exec command则代表需要执行的命令，我们这里用的是apache服务�
 
 其他项则可以点击问号查看注释
 
-同时，这里的命令不需要加上`&&`
+同时，这里的命令不需要加上` &&`，并根据需要进行优化和改动
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812197458-fd538dd3-2768-40d7-ab72-4ab25e6e880e.png#align=left&display=inline&height=1744&name=image.png&originHeight=1744&originWidth=1744&size=208223&status=done&width=1744)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfee549bj30u00u0tdw.jpg)
 
 最后保存设置，就可以开始自动化打包了。
 
@@ -237,19 +240,19 @@ Exec command则代表需要执行的命令，我们这里用的是apache服务�
 
 执行`git push`等操作后，jenkins捕获到webhooks，就可以自动进行打包部署。<br />可以在构建队列中查看状态。
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812393857-bbbc3762-1f07-4f01-952f-d0c34635fabf.png#align=left&display=inline&height=1278&name=image.png&originHeight=1278&originWidth=1486&size=218311&status=done&width=1486)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfeo1ctej30yw0u0n0j.jpg)
 
 好的情况下，我们会得到没有错误的环境
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812439988-a75abc1c-a250-4c1b-bd0f-ec21d12e1281.png#align=left&display=inline&height=128&name=image.png&originHeight=128&originWidth=688&size=14401&status=done&width=688)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfezx32oj30j403kdfy.jpg)
 
 但在执行失败的情况下，我们也则去控制台查看失败原因
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812451214-943742a1-94a8-45c7-b6bc-335e008e8c1f.png#align=left&display=inline&height=108&name=image.png&originHeight=108&originWidth=698&size=13901&status=done&width=698)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjffk659wj30je030jri.jpg)
 
 点击右箭头进入控制台输出查找原因
 
-![image.png](https://cdn.nlark.com/yuque/0/2019/png/309048/1568812480572-535f265e-67c3-46eb-bd56-bf945eb51156.png#align=left&display=inline&height=394&name=image.png&originHeight=394&originWidth=348&size=50646&status=done&width=348)
+![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfftw6nmj309o0ay74x.jpg)
 
 
 至此，基本的jenkins自动化部署流程已经没有问题了。
