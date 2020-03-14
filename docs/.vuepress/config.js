@@ -13,10 +13,10 @@ const navConfig = [
   //   link: '/'
   // },
   ...markdownNavConfig,
-  {
-    text: 'Github',
-    link: 'https://github.com/Squares4/vuepress-blog'
-  }
+  // {
+  //   text: 'Github',
+  //   link: 'https://github.com/Squares4/vuepress-blog'
+  // }
 ]
 
 module.exports = {

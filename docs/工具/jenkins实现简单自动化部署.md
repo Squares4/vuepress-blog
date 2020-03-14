@@ -1,6 +1,5 @@
 # 自动化部署-Jenkins
 
-<a name="66064f35"></a>
 ## Jenkins + gitlab 搭建工作流
 
 [Jenkins](https://jenkins.io/zh/)是一款业界流行的开源持续集成工具，广泛用于项目开发，具有自动化构建、测试和部署等功能。
@@ -16,10 +15,7 @@ Jenkins官网：[https://jenkins.io/](https://jenkins.io/)<br />中文：[https:
 
 本教程创建于2019年9月，后续版本更新可能会造成一系列配置问题。
 
-<a name="88210852"></a>
 ### 准备工作
-
-<a name="8b8a2831"></a>
 
 #### 配置JAVA8环境
 
@@ -63,7 +59,6 @@ yum install java-1.8.0-openjdk.x86_64
 
 重新使用`java -version`会出现相应的版本，则代表安装成功
 
-<a name="27afa614"></a>
 #### 安装jenkins
 
 如果服务器没有git，也需要安装
@@ -96,7 +91,6 @@ yum install -y jenkins
 
 需要注意的是，这两种方式启动的不是同一jenkins服务，一方的配置在另一方里是无效的，个人建议使用nohup启动方式，修改端口地址更方便些。
 
-<a name="62f9e5b1"></a>
 ### jenkins初始化
 
 启动后，控制台会输出这样的信息
@@ -121,10 +115,8 @@ yum install -y jenkins
 
 然后配置实例(域名)，一般来说默认即可
 
-<a name="67193e74"></a>
 ### 搭建项目
 
-<a name="47c24c9a"></a>
 #### 安装必要插件
 
 除了推荐安装的插件外，我们还需要安装另外一些必要的插件<br />点击 管理jenkins
@@ -140,7 +132,6 @@ yum install -y jenkins
 
 ![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjf7ulge7j319y0u0tk0.jpg)
 
-<a name="39da6755"></a>
 #### 创建项目
 
 安装完成后，进入首页，点击创建一个新任务
@@ -177,7 +168,6 @@ yum install -y jenkins
 
 ![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfao2vk4j30zu07y0te.jpg)<br />![](https://tva1.sinaimg.cn/large/00831rSTgy1gcjfb2t3wej30n6036glt.jpg)
 
-<a name="09f45109"></a>
 #### 构建阶段
 
 在**构建**中，点击**增加构建步骤**，选择`Execute shell`，在这里可以执行终端的命令
@@ -199,7 +189,6 @@ yum install -y jenkins
 
 第五步和第六步，分别是进入dist将文件夹内所有内容压缩，生成压缩文件dist.tar.gz。这是为了之后的自动化部署做准备，也可以使用unzip等其他压缩方式；
 
-<a name="4bd0d8d5"></a>
 #### 自动化远程部署
 
 这里为了演示方便，虽然可以直接在构建中部署，不过我们利用远程部署插件操作一次
@@ -235,7 +224,6 @@ Exec command则代表需要执行的命令，我们这里用的是apache服务�
 
 最后保存设置，就可以开始自动化打包了。
 
-<a name="ca08ccd6"></a>
 #### 执行打包
 
 执行`git push`等操作后，jenkins捕获到webhooks，就可以自动进行打包部署。<br />可以在构建队列中查看状态。
@@ -257,21 +245,16 @@ Exec command则代表需要执行的命令，我们这里用的是apache服务�
 
 至此，基本的jenkins自动化部署流程已经没有问题了。
 
-<a name="3bc5e602"></a>
 ### 邮箱
 
 占坑待填
 
-<a name="0d98c747"></a>
 ### 其他
 
 backup--建议安装backup插件，能够备份jenkins项目配置，防止意外情况导致配置文件丢失。
 
-<a name="d17a0f0b"></a>
 ### 参考
 
 [Linux下配置Jenkins+gitlab持续集成构建流程](https://juejin.im/post/5aab218e51882555627d06c5)
 
 [Gitlab+Jenkins搭建持续集成系统]()
-
-2019年9月18日
