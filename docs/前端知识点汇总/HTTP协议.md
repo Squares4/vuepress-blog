@@ -33,5 +33,3 @@ HTTP 响应状态代码指示特定 [HTTP](https://developer.mozilla.org/zh-cn/H
 3. TCP多路复用 HTTP 1.1 也可以通过PipeLine实现，但是是串行传输，多个请求可能被阻塞
 4. 支持传输流的优先级和流量控制机制
 5. 支持服务端推送
-
-## HTTP/3

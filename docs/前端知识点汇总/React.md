@@ -1,5 +1,13 @@
 # React 知识点
 
+## JSX
+
+JSX，是一个 JavaScript 的语法扩展。实际上，JSX 仅仅只是 `React.createElement(component, props, ...children)` 函数的语法糖，Babel 会把 JSX 转译成一个名为 `React.createElement()` 函数调用。
+
+React DOM 在渲染所有输入内容之前，默认会进行转义。它可以确保在你的应用中，永远不会注入那些并非自己明确编写的内容。所有的内容在渲染之前都被转换成了字符串。这样可以**有效地防止 XSS攻击**。
+
+[知乎：JSX有哪些缺陷](https://www.zhihu.com/question/48528161)
+
 ## React 生命周期
 
 ### (在构造函数中)调用 super(props) 的目的是什么
@@ -20,26 +28,28 @@ React.js 相对于直接操作原生DOM有很大的性能优势， 背后的技�
 
 ## setState() 机制
 
-[深入 setState 机制](https://github.com/sisterAn/blog/issues/26)
-
 在React中，**如果是由React引发的事件处理（比如通过onClick引发的事件处理），调用setState不会同步更新this.state，除此之外的setState调用会同步执行this.state**。所谓“除此之外”，指的是绕过React通过addEventListener直接添加的事件处理函数，还有通过setTimeout/setInterval产生的异步调用。
 
 在React的setState函数实现中，会根据一个变量isBatchingUpdates判断是直接更新this.state还是放到队列中回头再说，而isBatchingUpdates默认是false，也就表示setState会同步更新this.state，但是，**有一个函数batchedUpdates，这个函数会把isBatchingUpdates修改为true，而当React在调用事件处理函数之前就会调用这个batchedUpdates，造成的后果，就是由React控制的事件处理过程setState不会同步更新this.state**。
 对于异步渲染，我们应在 `getSnapshotBeforeUpdate` 中读取 `state`、`props`, 而不是 `componentWillUpdate`。但调用`forceUpdate()` 强制 render 时，会导致组件跳过 `shouldComponentUpdate()`,直接调用 `render()`。
 
-## HOC 
+[深入 setState 机制](https://github.com/sisterAn/blog/issues/26)
 
 ## 事件在 React 中的处理方式。
 
-为了解决跨浏览器兼容性问题，您的 React 中的事件处理程序将传递 SyntheticEvent(合成事件) 的实例，它是 React 的浏览器本机事件的跨浏览器包装器。
+> 为了解决跨浏览器兼容性问题，您的 React 中的事件处理程序将传递 SyntheticEvent(合成事件) 的实例，它是 React 的浏览器本机事件的跨浏览器包装器。
+>
+> 这些 SyntheticEvent 与您习惯的原生事件具有相同的接口，除了它们在所有浏览器中都兼容。有趣的是，React 实际上并没有将事件附加到子节点本身。React 将使用单个事件监听器监听顶层的所有事件。这对于性能是有好处的，这也意味着在更新 DOM 时，React 不需要担心跟踪事件监听器。
 
-这些 SyntheticEvent 与您习惯的原生事件具有相同的接口，除了它们在所有浏览器中都兼容。有趣的是，React 实际上并没有将事件附加到子节点本身。React 将使用单个事件监听器监听顶层的所有事件。这对于性能是有好处的，这也意味着在更新 DOM 时，React 不需要担心跟踪事件监听器。
+React 为提高性能，有自己的一套事件处理机制，相当于将事件代理到全局进行处理，也就是说监听函数并未绑定到DOM元素上。因此，如果你禁止react事件冒泡`e.stopPropagation()`，你就无法阻止原生事件冒泡；你禁用原生事件冒泡`e.nativeEvent.stopPropagation()`，React的监听函数就调用不到了。
+
+[React 中阻止事件冒泡的问题](https://www.cnblogs.com/Wayou/p/react_event_issue.html)
+
+[React合成事件和DOM原生事件混用须知](https://juejin.im/post/59db6e7af265da431f4a02ef)
 
 ### 合成事件的冒泡处理
 
-## pureComponent & Component 【性能优化】
-
-https://juejin.im/entry/5934c9bc570c35005b556e1a
+## pureComponent & Component
 
 当组件更新时，如果组件的 props 和 state 都没发生改变，render 方法就不会触发，省去 Virtual DOM 的生成和比对过程，达到提升性能的目的。具体就是 React 自动帮我们做了一层浅比较：
 
@@ -58,7 +68,9 @@ PureComponent真正起作用的，只是在一些纯展示组件上，复杂组�
 
 ![69d9946ce551af0e28a307d5cfb066b1](https://tva1.sinaimg.cn/large/00831rSTgy1gckjjisr6lj31e20u0k0b.jpg)
 
-##  [React.memo()](https://zh-hans.reactjs.org/docs/react-api.html#reactmemo)
+[React PureComponent 使用指南](https://wulv.site/2017-05-31/react-purecomponent.html)
+
+##  React.memo()
 
 React.memo 为高阶组件。它与 React.PureComponent 非常相似，但它适用于函数组件，但不适用于 class 组件。官网原文如下。
 
@@ -81,8 +93,6 @@ export default React.memo(MyComponent, areEqual);
 ```
 
 ##  react.lazy & suspense 
-
-原理解析：https://zhuanlan.zhihu.com/p/58979795
 
 可以不借助任何附加库就能通过代码分割（code splitting）延迟加载 react 组件。延迟加载是一种优先渲染必须或重要的用户界面项目，而将不重要的项目悄然载入的技术。先前有react-loadable实现。
 
@@ -120,6 +130,8 @@ function MyComponent() {
 
 > React.lazy 和 Suspense 技术还不支持服务端渲染。如果你想要在使用服务端渲染的应用中使用，我们推荐 Loadable Components 这个库。
 
+[React lazy/Suspense使用及源码解析](https://zhuanlan.zhihu.com/p/58979795)
+
 ##  Context 
 
 Context 提供了一种在组件之间共享此类值的方式，而不必显式地通过组件树的逐层传递 props。比如Redux或者传递主题的属性。
@@ -132,18 +144,10 @@ Context 提供了一种在组件之间共享此类值的方式，而不必显式
 
 [聊一聊我对 React Context 的理解以及应用](https://juejin.im/post/5a90e0545188257a63112977)
 
-## React Hooks 
-
 ## 【数据绑定】 Angular和Vue的双向数据绑定实现的原理？
 
-> Angular的实现： AngularJS 采用“脏值检测”的方式，数据发生变更后，对于所有的数据和视图的绑定关系进行一次检测，识别是否有数据发生了改变，有变化进行处理，可能进一步引发其他数据的改变，所以这个过程可能会循环几次，一直到不再有数据变化发生后，将变更的数据发送到视图，更新页面展现。
-> 只有当改变$scope的值、使用内置的$interval、$timeout的时候，才会进行“脏检测”。
-> 如果是手动对 ViewModel 的数据进行变更，为确保变更同步到视图，需要手动触发一次“脏值检测”。
-> Vue的实现：核心就是数据劫持+发布/订阅模式，VueJS 使用 ES5 提供的 Object.defineProperty() 方法，监控对数据的操作，从而可以自动触发数据同步。并且，由于是在不同的数据上触发同步，可以精确的将变更发送给绑定的视图，而不是对所有的数据都执行一次检测。
-
-# Redux
-
-##【Redux】 纯函数 & reducer ❌
-
-##【Redux】 redux-thunk && redux-saga 作用以及原理 ❌
+Angular的实现： AngularJS 采用“脏值检测”的方式，数据发生变更后，对于所有的数据和视图的绑定关系进行一次检测，识别是否有数据发生了改变，有变化进行处理，可能进一步引发其他数据的改变，所以这个过程可能会循环几次，一直到不再有数据变化发生后，将变更的数据发送到视图，更新页面展现。
+只有当改变$scope的值、使用内置的$interval、$timeout的时候，才会进行“脏检测”。
+如果是手动对 ViewModel 的数据进行变更，为确保变更同步到视图，需要手动触发一次“脏值检测”。
+Vue的实现：核心就是数据劫持+发布/订阅模式，VueJS 使用 ES5 提供的 Object.defineProperty() 方法，监控对数据的操作，从而可以自动触发数据同步。并且，由于是在不同的数据上触发同步，可以精确的将变更发送给绑定的视图，而不是对所有的数据都执行一次检测。
 
