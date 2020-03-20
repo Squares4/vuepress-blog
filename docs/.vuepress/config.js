@@ -26,6 +26,7 @@ module.exports = {
     lastUpdated: '上次更新', // 基于git的
     nav: navConfig,
     sidebar: markdownSidebarConfig,
+    sidebarDepth: 2
     // defaultTheme: { dark: [18, 6] },
   },
   plugins: ['@vuepress/back-to-top'],
