@@ -193,6 +193,8 @@ Context 提供了一种在组件之间共享此类值的方式，而不必显式
    * react16 中，用一个数组 contextStack 维护 `context`，只会在带有`getChildContext`的组件中 `contextStack.unshift`由 `getChildContext` 得到的 `context`，之后的子组件会将`contextStack[0]` 作为自己的 `context`，而深度优先遍历深度延续结束后，回到开始的 fiber 节点过程中，会再次访问深度遍历时访问的父节点，这时候再做 `contextStack.shift`() 操作，维护 `contextStack` 数组
 3. 符合组件的生命周期
 
+https://juejin.im/post/5e437209518825490455c90b
+
 # Redux 知识点
 
 ## 纯函数 & reducer 
